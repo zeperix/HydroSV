@@ -648,6 +648,8 @@ namespace nvhttp {
     static auto constexpr to_string = "NONE"sv;
   };
 
+  static std::unordered_map<std::string, std::shared_ptr<crypto::named_cert_t>> cert_store;
+
   inline crypto::named_cert_t* get_verified_cert(req_https_t request) {
     auto it = cert_store.find(request->remote_endpoint().address().to_string());
     return it != cert_store.end() ? it->second.get() : nullptr;
@@ -1619,7 +1621,7 @@ namespace nvhttp {
       }
 
       verified = true;
-      req->userp = named_cert_p;
+      cert_store[req->remote_endpoint().address().to_string()] = named_cert_p;
       cert_store[req->remote_endpoint().address().to_string()] = named_cert_p;
 
       return true;
