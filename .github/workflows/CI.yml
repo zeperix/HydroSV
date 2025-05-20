@@ -888,6 +888,8 @@ jobs:
           # install dependencies
           dependencies=(
             "git"
+            "zip"
+            "unzip"
             "mingw-w64-ucrt-x86_64-cmake"
             "mingw-w64-ucrt-x86_64-cppwinrt"
             "mingw-w64-ucrt-x86_64-curl-winssl"
@@ -955,6 +957,8 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           COMMIT: ${{ needs.setup_release.outputs.release_commit }}
         run: |
+          unzip ./third-party/pack.zip -d ./third-party/
+
           mkdir -p build
           cmake \
             -B build \
