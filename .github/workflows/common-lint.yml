@@ -12,7 +12,7 @@ permissions:
 on:
   pull_request:
     branches:
-      - master
+      - #master
     types:
       - opened
       - synchronize

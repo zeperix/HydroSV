@@ -21,15 +21,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  github_env:
-    name: GitHub Env Debug
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dump github context
-        run: echo "$GITHUB_CONTEXT"
-        shell: bash
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
+  # github_env:
+  #   name: GitHub Env Debug
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Dump github context
+  #       run: echo "$GITHUB_CONTEXT"
+  #       shell: bash
+  #       env:
+  #         GITHUB_CONTEXT: ${{ toJson(github) }}
 
   setup_release:
     name: Setup Release
@@ -53,22 +53,24 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-  build_linux_flatpak:
-    name: Linux Flatpak
-    env:
-      APP_ID: dev.lizardbyte.app.Sunshine
-      NODE_VERSION: "20"
-      PLATFORM_VERSION: "23.08"
-    needs: setup_release
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      fail-fast: false  # false to test all, true to fail entire job if any fail
-      matrix:
-        include:
-          - arch: x86_64
-            runner: ubuntu-22.04
-          - arch: aarch64
-            runner: ubuntu-22.04-arm
+  # Linux Flatpak build disabled
+  #  # Linux Flatpak build configuration disabled
+  # build_linux_flatpak:
+  #   name: Linux Flatpak
+  #   env:
+  #     APP_ID: dev.lizardbyte.app.Sunshine
+  #     NODE_VERSION: "20"
+  #     PLATFORM_VERSION: "23.08"
+  #   needs: setup_release
+  #   runs-on: ${{ matrix.runner }}
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       include:
+  #         - arch: x86_64
+  #           runner: ubuntu-22.04
+  #         - arch: aarch64
+  #           runner: ubuntu-22.04-arm
     steps:
       - name: Maximize build space
         if: matrix.arch == 'x86_64'
@@ -262,17 +264,18 @@ jobs:
           tag: ${{ needs.setup_release.outputs.release_tag }}
           token: ${{ secrets.GH_BOT_TOKEN }}
 
-  build_linux:
-    name: Linux ${{ matrix.type }}
-    runs-on: ubuntu-${{ matrix.dist }}
-    needs: setup_release
-    strategy:
-      fail-fast: false  # false to test all, true to fail entire job if any fail
-      matrix:
-        include:  # package these differently
-          - type: AppImage
-            EXTRA_ARGS: '--appimage-build'
-            dist: 22.04
+  # Linux build disabled
+  # build_linux:
+  #   name: Linux ${{ matrix.type }}
+  #   runs-on: ubuntu-${{ matrix.dist }}
+  #   needs: setup_release
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       include:
+  #         - type: AppImage
+  #           EXTRA_ARGS: '--appimage-build'
+  #           dist: 22.04
     steps:
       - name: Maximize build space
         uses: easimon/maximize-build-space@v10
@@ -493,13 +496,14 @@ jobs:
           tag: ${{ needs.setup_release.outputs.release_tag }}
           token: ${{ secrets.GH_BOT_TOKEN }}
 
-  build_homebrew:
-    name: Homebrew (${{ matrix.os_name }}-${{ matrix.os_version }}${{ matrix.release == true && ' (Release)' || '' }})
-    needs: setup_release
-    strategy:
-      fail-fast: false  # false to test all, true to fail entire job if any fail
-      matrix:
-        include:
+  # Homebrew build disabled
+  # build_homebrew:
+  #   name: Homebrew (${{ matrix.os_name }}-${{ matrix.os_version }}${{ matrix.release == true && ' (Release)' || '' }})
+  #   needs: setup_release
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       include:
           # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
           # while GitHub has larger macOS runners, they are not available for our repos :(
           - os_version: "13"

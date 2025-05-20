@@ -6,15 +6,15 @@ permissions:
 on:
   pull_request:
     branches:
-      - master
+      - #master
     types:
-      - opened
-      - synchronize
-      - reopened
+      - #opened
+      - #synchronize
+      - #reopened
   release:
     types:
-      - prereleased
-      - released
+      - #prereleased
+      - #released
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"

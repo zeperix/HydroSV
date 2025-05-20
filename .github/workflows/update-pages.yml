@@ -6,14 +6,14 @@ permissions:
 on:
   pull_request:
     branches:
-      - master
+      - #master
     types:
-      - opened
-      - synchronize
-      - reopened
+      - #opened
+      - #synchronize
+      - #reopened
   push:
     branches:
-      - master
+      - #master
   workflow_dispatch:
 
 concurrency:
