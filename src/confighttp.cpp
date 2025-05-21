@@ -1295,8 +1295,6 @@ namespace confighttp {
     auto port_https = net::map_port(PORT_HTTPS);
     auto address_family = net::af_from_enum_string(config::sunshine.address_family);
     https_server_t server { config::nvhttp.cert, config::nvhttp.pkey };
-
-    // Default resources must be included before other resources
     server.default_resource["DELETE"] = [](resp_https_t response, req_https_t request) {
       bad_request(response, request);
     };
@@ -1310,7 +1308,6 @@ namespace confighttp {
       bad_request(response, request);
     };
     server.default_resource["GET"] = not_found;
-
     server.resource["^/$"]["GET"] = getIndexPage;
     server.resource["^/pin/?$"]["GET"] = getPinPage;
     server.resource["^/apps/?$"]["GET"] = getAppsPage;
@@ -1335,18 +1332,15 @@ namespace confighttp {
     server.resource["^/api/quit$"]["POST"] = quit;
     server.resource["^/api/reset-display-device-persistence$"]["POST"] = resetDisplayDevicePersistence;
     server.resource["^/api/password$"]["POST"] = savePassword;
-    server.resource["^/api/clients$"]["GET"] = getClientsPage;
     server.resource["^/api/clients/unpair-all$"]["POST"] = unpairAll;
     server.resource["^/api/clients/list$"]["GET"] = getClients;
     server.resource["^/api/clients/update$"]["POST"] = updateClient;
     server.resource["^/api/clients/unpair$"]["POST"] = unpair;
     server.resource["^/api/clients/disconnect$"]["POST"] = disconnect;
-    server.resource["^/api/network/private-ip$"]["GET"] = getPrivateIP;
     server.resource["^/api/covers/upload$"]["POST"] = uploadCover;
     server.resource["^/images/apollo.ico$"]["GET"] = getFaviconImage;
     server.resource["^/images/logo-apollo-45.png$"]["GET"] = getApolloLogoImage;
     server.resource["^/assets\\/.+$"]["GET"] = getNodeModules;
-
     server.config.reuse_address = true;
     server.config.address = net::af_to_any_address_string(address_family);
     server.config.port = port_https;

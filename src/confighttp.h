@@ -19,9 +19,7 @@ using namespace std::chrono_literals;
 namespace confighttp {
   constexpr auto PORT_HTTPS = 1;
   constexpr auto SESSION_EXPIRE_DURATION = 24h * 15;
-
   void start();
-  void getPrivateIP(resp_https_t response, req_https_t request);
 }  // namespace confighttp
 
 // mime types map
