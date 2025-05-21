@@ -86,7 +86,7 @@ const copyToClipboard = async (text) => {
 
 const getPrivateIP = async () => {
     try {
-        const response = await fetch('/api/ip/private');
+        const response = await fetch('/api/network/private-ip');
         const data = await response.json();
         privateIP.value = data.ip;
     } catch (err) {
