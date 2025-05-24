@@ -297,13 +297,13 @@ jobs:
           cpack -G ZIP
 
           # move
-          mv ./cpack_artifacts/AquaHost.exe ../artifacts/sunshine-windows-installer.exe
-          mv ./cpack_artifacts/AquaHost.zip ../artifacts/sunshine-windows-portable.zip
+          mv ./cpack_artifacts/AquaHost.exe ../artifacts/AquaHost-installer.exe
+          mv ./cpack_artifacts/AquaHost.zip ../artifacts/AquaHost-portable.zip
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: sunshine-windows
+          name: AquaHost
           path: artifacts/
           if-no-files-found: error
 
