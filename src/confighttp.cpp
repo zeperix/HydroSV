@@ -439,7 +439,7 @@ namespace confighttp {
    * @todo combine function with getFaviconImage and possibly getNodeModules
    * @todo use mime_types map
    */
-  void getApolloLogoImage(resp_https_t response, req_https_t request) {
+  void getAquaHostLogoImage(resp_https_t response, req_https_t request) {
     print_req(request);
 
     std::ifstream in(WEB_DIR "images/logo-apollo-45.png", std::ios::binary);
@@ -1339,7 +1339,7 @@ namespace confighttp {
     server.resource["^/api/clients/disconnect$"]["POST"] = disconnect;
     server.resource["^/api/covers/upload$"]["POST"] = uploadCover;
     server.resource["^/images/apollo.ico$"]["GET"] = getFaviconImage;
-    server.resource["^/images/logo-apollo-45.png$"]["GET"] = getApolloLogoImage;
+    server.resource["^/images/logo-apollo-45.png$"]["GET"] = getAquaHostLogoImage;
     server.resource["^/assets\\/.+$"]["GET"] = getNodeModules;
     server.config.reuse_address = true;
     server.config.address = net::af_to_any_address_string(address_family);

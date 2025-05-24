@@ -3,7 +3,7 @@
 rem Get sunshine root directory
 for %%I in ("%~dp0\..") do set "ROOT_DIR=%%~fI"
 
-set SERVICE_NAME=ApolloService
+set SERVICE_NAME=AquaHostService
 set SERVICE_BIN="%ROOT_DIR%\tools\sunshinesvc.exe"
 
 rem Set service to demand start. It will be changed to auto later if the user selected that option.
@@ -13,7 +13,7 @@ rem Remove the legacy SunshineSvc service
 net stop sunshinesvc
 sc delete sunshinesvc
 
-rem Check if ApolloService already exists
+rem Check if AquaHostService already exists
 sc qc %SERVICE_NAME% > nul 2>&1
 if %ERRORLEVEL%==0 (
     rem Stop the existing service if running

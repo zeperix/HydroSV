@@ -80,7 +80,7 @@
   import Navbar from './Navbar.vue'
   import ClientCard from './ClientCard.vue'
   import ResourceCard from './ResourceCard.vue'
-  import ApolloVersion from './apollo_version'
+  import AquaHostVersion from './apollo_version'
 
   console.log("Hello, AquaHost!")
   let app = createApp({
@@ -103,12 +103,12 @@
       try {
         let config = await fetch("./api/config").then((r) => r.json());
         this.notifyPreReleases = config.notify_pre_releases;
-        this.version = new ApolloVersion(null, config.version);
+        this.version = new AquaHostVersion(null, config.version);
         console.log("Version: ", this.version.version)
-        this.githubVersion = new ApolloVersion(await fetch("https://api.github.com/repos/ClassicOldSong/AquaHost/releases/latest").then((r) => r.json()), null);
+        this.githubVersion = new AquaHostVersion(await fetch("https://api.github.com/repos/ClassicOldSong/AquaHost/releases/latest").then((r) => r.json()), null);
         console.log("GitHub Version: ", this.githubVersion.version)
         if (this.githubVersion) {
-          this.preReleaseVersion = new ApolloVersion((await fetch("https://api.github.com/repos/ClassicOldSong/AquaHost/releases").then((r) => r.json())).find(release => release.prerelease), null);
+          this.preReleaseVersion = new AquaHostVersion((await fetch("https://api.github.com/repos/ClassicOldSong/AquaHost/releases").then((r) => r.json())).find(release => release.prerelease), null);
           console.log("Pre-Release Version: ", this.preReleaseVersion.version)
         }
       } catch (e) {
