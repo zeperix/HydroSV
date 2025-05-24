@@ -24,6 +24,7 @@ year = datetime.datetime.now().year
 
 # target locales
 target_locales = [
+    'vi', #Vietnamese
     'bg',  # Bulgarian
     'de',  # German
     'en',  # English
