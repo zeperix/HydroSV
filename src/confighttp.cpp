@@ -432,7 +432,7 @@ namespace confighttp {
   }
 
   /**
-   * @brief Get the Apollo logo image.
+   * @brief Get the AquaHost logo image.
    * @param response The HTTP response object.
    * @param request The HTTP request object.
    *
@@ -1120,7 +1120,7 @@ namespace confighttp {
   }
 
   /**
-   * @brief Restart Apollo.
+   * @brief Restart AquaHost.
    * @param response The HTTP response object.
    * @param request The HTTP request object.
    *
@@ -1138,7 +1138,7 @@ namespace confighttp {
   }
 
   /**
-   * @brief Quit Apollo.
+   * @brief Quit AquaHost.
    * @param response The HTTP response object.
    * @param request The HTTP request object.
    *

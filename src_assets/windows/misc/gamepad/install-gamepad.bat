@@ -12,7 +12,7 @@ if %ERRORLEVEL% EQU 2 (
 )
 
 rem Get temp directory
-set temp_dir=%temp%/Apollo
+set temp_dir=%temp%/AquaHost
 
 rem Create temp directory if it doesn't exist
 if not exist "%temp_dir%" mkdir "%temp_dir%"

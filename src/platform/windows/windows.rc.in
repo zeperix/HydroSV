@@ -17,11 +17,11 @@ BEGIN
         BLOCK "040904E4"
         BEGIN
             VALUE "CompanyName",      "SudoMaker\0"
-            VALUE "FileDescription",  "Apollo\0"
+            VALUE "FileDescription",  "AquaHost\0"
             VALUE "FileVersion",      "@PROJECT_VERSION@\0"
-            VALUE "InternalName",     "Apollo\0"
-            VALUE "LegalCopyright",   "https://raw.githubusercontent.com/ClassicOldSong/Apollo/master/LICENSE\0"
-            VALUE "ProductName",      "Apollo\0"
+            VALUE "InternalName",     "AquaHost\0"
+            VALUE "LegalCopyright",   "https://raw.githubusercontent.com/ClassicOldSong/AquaHost/master/LICENSE\0"
+            VALUE "ProductName",      "AquaHost\0"
             VALUE "ProductVersion",   "@PROJECT_VERSION@\0"
         END
     END

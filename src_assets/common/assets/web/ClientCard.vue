@@ -23,8 +23,8 @@
         {
             platform: 'Android',
             icon: 'fa-brands fa-android',
-            name: 'Artemis',
-            link: 'https://github.com/ClassicOldSong/moonlight-android'
+            name: 'FireCly',
+            link: 'https://github.com/zeperix/FireCly'
         },
         {
             platform: 'iOS',
