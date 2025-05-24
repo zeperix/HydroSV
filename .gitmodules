@@ -40,7 +40,7 @@
 	branch = sdk
 [submodule "third-party/Simple-Web-Server"]
 	path = third-party/Simple-Web-Server
-	url = https://github.com/ClassicOldSong/Simple-Web-Server
+	url = https://github.com/ClassicOldSong/Simple-Web-Server.git
 	branch = master
 [submodule "third-party/TPCircularBuffer"]
 	path = third-party/TPCircularBuffer
