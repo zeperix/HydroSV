@@ -1,16 +1,16 @@
 # linux specific compile definitions
 
-add_compile_definitions(SUNSHINE_PLATFORM="linux")
+add_compile_definitions(AQUA_PLATFORM="linux")
 
 # AppImage
-if(${SUNSHINE_BUILD_APPIMAGE})
+if(${AQUA_BUILD_APPIMAGE})
     # use relative assets path for AppImage
-    string(REPLACE "${CMAKE_INSTALL_PREFIX}" ".${CMAKE_INSTALL_PREFIX}" SUNSHINE_ASSETS_DIR_DEF ${SUNSHINE_ASSETS_DIR})
+    string(REPLACE "${CMAKE_INSTALL_PREFIX}" ".${CMAKE_INSTALL_PREFIX}" AQUA_ASSETS_DIR_DEF ${AQUA_ASSETS_DIR})
 endif()
 
 # cuda
 set(CUDA_FOUND OFF)
-if(${SUNSHINE_ENABLE_CUDA})
+if(${AQUA_ENABLE_CUDA})
     include(CheckLanguage)
     check_language(CUDA)
 
@@ -70,7 +70,7 @@ if(${SUNSHINE_ENABLE_CUDA})
     elseif(${CUDA_FAIL_ON_MISSING})
         message(FATAL_ERROR
                 "CUDA not found.
-                If this is intentional, set '-DSUNSHINE_ENABLE_CUDA=OFF' or '-DCUDA_FAIL_ON_MISSING=OFF'"
+                If this is intentional, set '-DAQUA_ENABLE_CUDA=OFF' or '-DCUDA_FAIL_ON_MISSING=OFF'"
         )
     endif()
 endif()
@@ -82,11 +82,11 @@ if(CUDA_FOUND)
             "${CMAKE_SOURCE_DIR}/src/platform/linux/cuda.cpp"
             "${CMAKE_SOURCE_DIR}/third-party/nvfbc/NvFBC.h")
 
-    add_compile_definitions(SUNSHINE_BUILD_CUDA)
+    add_compile_definitions(AQUA_BUILD_CUDA)
 endif()
 
 # drm
-if(${SUNSHINE_ENABLE_DRM})
+if(${AQUA_ENABLE_DRM})
     find_package(LIBDRM REQUIRED)
     find_package(LIBCAP REQUIRED)
 else()
@@ -94,25 +94,25 @@ else()
     set(LIBCAP_FOUND OFF)
 endif()
 if(LIBDRM_FOUND AND LIBCAP_FOUND)
-    add_compile_definitions(SUNSHINE_BUILD_DRM)
+    add_compile_definitions(AQUA_BUILD_DRM)
     include_directories(SYSTEM ${LIBDRM_INCLUDE_DIRS} ${LIBCAP_INCLUDE_DIRS})
     list(APPEND PLATFORM_LIBRARIES ${LIBDRM_LIBRARIES} ${LIBCAP_LIBRARIES})
     list(APPEND PLATFORM_TARGET_FILES
             "${CMAKE_SOURCE_DIR}/src/platform/linux/kmsgrab.cpp")
-    list(APPEND SUNSHINE_DEFINITIONS EGL_NO_X11=1)
+    list(APPEND AQUA_DEFINITIONS EGL_NO_X11=1)
 endif()
 
 # evdev
 include(dependencies/libevdev_Sunshine)
 
 # vaapi
-if(${SUNSHINE_ENABLE_VAAPI})
+if(${AQUA_ENABLE_VAAPI})
     find_package(Libva REQUIRED)
 else()
     set(LIBVA_FOUND OFF)
 endif()
 if(LIBVA_FOUND)
-    add_compile_definitions(SUNSHINE_BUILD_VAAPI)
+    add_compile_definitions(AQUA_BUILD_VAAPI)
     include_directories(SYSTEM ${LIBVA_INCLUDE_DIR})
     list(APPEND PLATFORM_LIBRARIES ${LIBVA_LIBRARIES} ${LIBVA_DRM_LIBRARIES})
     list(APPEND PLATFORM_TARGET_FILES
@@ -121,15 +121,15 @@ if(LIBVA_FOUND)
 endif()
 
 # wayland
-if(${SUNSHINE_ENABLE_WAYLAND})
+if(${AQUA_ENABLE_WAYLAND})
     find_package(Wayland REQUIRED)
 else()
     set(WAYLAND_FOUND OFF)
 endif()
 if(WAYLAND_FOUND)
-    add_compile_definitions(SUNSHINE_BUILD_WAYLAND)
+    add_compile_definitions(AQUA_BUILD_WAYLAND)
 
-    if(NOT SUNSHINE_SYSTEM_WAYLAND_PROTOCOLS)
+    if(NOT AQUA_SYSTEM_WAYLAND_PROTOCOLS)
         set(WAYLAND_PROTOCOLS_DIR "${CMAKE_SOURCE_DIR}/third-party/wayland-protocols")
     else()
         pkg_get_variable(WAYLAND_PROTOCOLS_DIR wayland-protocols pkgdatadir)
@@ -154,13 +154,13 @@ if(WAYLAND_FOUND)
 endif()
 
 # x11
-if(${SUNSHINE_ENABLE_X11})
+if(${AQUA_ENABLE_X11})
     find_package(X11 REQUIRED)
 else()
     set(X11_FOUND OFF)
 endif()
 if(X11_FOUND)
-    add_compile_definitions(SUNSHINE_BUILD_X11)
+    add_compile_definitions(AQUA_BUILD_X11)
     include_directories(SYSTEM ${X11_INCLUDE_DIR})
     list(APPEND PLATFORM_LIBRARIES ${X11_LIBRARIES})
     list(APPEND PLATFORM_TARGET_FILES
@@ -177,14 +177,14 @@ if(NOT ${CUDA_FOUND}
 endif()
 
 # tray icon
-if(${SUNSHINE_ENABLE_TRAY})
+if(${AQUA_ENABLE_TRAY})
     pkg_check_modules(APPINDICATOR ayatana-appindicator3-0.1)
     if(APPINDICATOR_FOUND)
-        list(APPEND SUNSHINE_DEFINITIONS TRAY_AYATANA_APPINDICATOR=1)
+        list(APPEND AQUA_DEFINITIONS TRAY_AYATANA_APPINDICATOR=1)
     else()
         pkg_check_modules(APPINDICATOR appindicator3-0.1)
         if(APPINDICATOR_FOUND)
-            list(APPEND SUNSHINE_DEFINITIONS TRAY_LEGACY_APPINDICATOR=1)
+            list(APPEND AQUA_DEFINITIONS TRAY_LEGACY_APPINDICATOR=1)
         endif ()
     endif()
     pkg_check_modules(LIBNOTIFY libnotify)
@@ -197,18 +197,18 @@ if(${SUNSHINE_ENABLE_TRAY})
         link_directories(${APPINDICATOR_LIBRARY_DIRS} ${LIBNOTIFY_LIBRARY_DIRS})
 
         list(APPEND PLATFORM_TARGET_FILES "${CMAKE_SOURCE_DIR}/third-party/tray/src/tray_linux.c")
-        list(APPEND SUNSHINE_EXTERNAL_LIBRARIES ${APPINDICATOR_LIBRARIES} ${LIBNOTIFY_LIBRARIES})
+        list(APPEND AQUA_EXTERNAL_LIBRARIES ${APPINDICATOR_LIBRARIES} ${LIBNOTIFY_LIBRARIES})
     endif()
 
     # flatpak icons must be prefixed with the app id or they will not be included in the flatpak
-    if(${SUNSHINE_BUILD_FLATPAK})
-        set(SUNSHINE_TRAY_PREFIX "${PROJECT_FQDN}")
+    if(${AQUA_BUILD_FLATPAK})
+        set(AQUA_TRAY_PREFIX "${PROJECT_FQDN}")
     else()
-        set(SUNSHINE_TRAY_PREFIX "apollo")
+        set(AQUA_TRAY_PREFIX "apollo")
     endif()
-    list(APPEND SUNSHINE_DEFINITIONS SUNSHINE_TRAY_PREFIX="${SUNSHINE_TRAY_PREFIX}")
+    list(APPEND AQUA_DEFINITIONS AQUA_TRAY_PREFIX="${AQUA_TRAY_PREFIX}")
 else()
-    set(SUNSHINE_TRAY 0)
+    set(AQUA_TRAY 0)
     message(STATUS "Tray icon disabled")
 endif()
 
@@ -217,7 +217,7 @@ set(LIBEVDEV_CUSTOM_INCLUDE_DIR "${EVDEV_INCLUDE_DIR}")
 set(LIBEVDEV_CUSTOM_LIBRARY "${EVDEV_LIBRARY}")
 
 add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/inputtino")
-list(APPEND SUNSHINE_EXTERNAL_LIBRARIES inputtino::libinputtino)
+list(APPEND AQUA_EXTERNAL_LIBRARIES inputtino::libinputtino)
 file(GLOB_RECURSE INPUTTINO_SOURCES
         ${CMAKE_SOURCE_DIR}/src/platform/linux/input/inputtino*.h
         ${CMAKE_SOURCE_DIR}/src/platform/linux/input/inputtino*.cpp)
@@ -229,11 +229,11 @@ if(EXTERNAL_PROJECT_LIBEVDEV_USED)
 endif()
 
 # AppImage and Flatpak
-if (${SUNSHINE_BUILD_APPIMAGE})
-    list(APPEND SUNSHINE_DEFINITIONS SUNSHINE_BUILD_APPIMAGE=1)
+if (${AQUA_BUILD_APPIMAGE})
+    list(APPEND AQUA_DEFINITIONS AQUA_BUILD_APPIMAGE=1)
 endif ()
-if (${SUNSHINE_BUILD_FLATPAK})
-    list(APPEND SUNSHINE_DEFINITIONS SUNSHINE_BUILD_FLATPAK=1)
+if (${AQUA_BUILD_FLATPAK})
+    list(APPEND AQUA_DEFINITIONS AQUA_BUILD_FLATPAK=1)
 endif ()
 
 list(APPEND PLATFORM_TARGET_FILES

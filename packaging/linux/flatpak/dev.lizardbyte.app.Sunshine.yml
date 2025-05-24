@@ -10,7 +10,7 @@ separate-locales: false
 finish-args:
   - --device=all  # access all devices
   - --env=PULSE_PROP_media.category=Manager  # allow sunshine to manage audio sinks
-  - --env=SUNSHINE_MIGRATE_CONFIG=1  # migrate config files to the new location
+  - --env=AQUA_MIGRATE_CONFIG=1  # migrate config files to the new location
   - --filesystem=home  # need to save files in user's home directory
   - --share=ipc  # required for X11 shared memory extension
   - --share=network  # access network
@@ -67,16 +67,16 @@ modules:
       - -DBUILD_WERROR=ON
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_CUDA_COMPILER=/app/cuda/bin/nvcc
-      - -DSUNSHINE_ASSETS_DIR=share/sunshine
-      - -DSUNSHINE_BUILD_FLATPAK=ON
-      - -DSUNSHINE_EXECUTABLE_PATH=/app/bin/sunshine
-      - -DSUNSHINE_ENABLE_WAYLAND=ON
-      - -DSUNSHINE_ENABLE_X11=ON
-      - -DSUNSHINE_ENABLE_DRM=ON
-      - -DSUNSHINE_ENABLE_CUDA=ON
-      - -DSUNSHINE_PUBLISHER_NAME='LizardByte'
-      - -DSUNSHINE_PUBLISHER_WEBSITE='https://app.lizardbyte.dev'
-      - -DSUNSHINE_PUBLISHER_ISSUE_URL='https://app.lizardbyte.dev/support'
+      - -DAQUA_ASSETS_DIR=share/sunshine
+      - -DAQUA_BUILD_FLATPAK=ON
+      - -DAQUA_EXECUTABLE_PATH=/app/bin/sunshine
+      - -DAQUA_ENABLE_WAYLAND=ON
+      - -DAQUA_ENABLE_X11=ON
+      - -DAQUA_ENABLE_DRM=ON
+      - -DAQUA_ENABLE_CUDA=ON
+      - -DAQUA_PUBLISHER_NAME='LizardByte'
+      - -DAQUA_PUBLISHER_WEBSITE='https://app.lizardbyte.dev'
+      - -DAQUA_PUBLISHER_ISSUE_URL='https://app.lizardbyte.dev/support'
     no-make-install: false
     post-install:
       - install -D $FLATPAK_BUILDER_BUILDDIR/packaging/linux/flatpak/scripts/* /app/bin

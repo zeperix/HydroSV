@@ -14,45 +14,45 @@ install(TARGETS audio-info RUNTIME DESTINATION "tools" COMPONENT audio)
 install(TARGETS sunshinesvc RUNTIME DESTINATION "tools" COMPONENT application)
 
 # Drivers
-install(DIRECTORY "${SUNSHINE_SOURCE_ASSETS_DIR}/windows/drivers/sudovda"
+install(DIRECTORY "${AQUA_SOURCE_ASSETS_DIR}/windows/drivers/sudovda"
         DESTINATION "drivers"
         COMPONENT sudovda)
 
 # Mandatory scripts
-install(DIRECTORY "${SUNSHINE_SOURCE_ASSETS_DIR}/windows/misc/service/"
+install(DIRECTORY "${AQUA_SOURCE_ASSETS_DIR}/windows/misc/service/"
         DESTINATION "scripts"
         COMPONENT assets)
-install(DIRECTORY "${SUNSHINE_SOURCE_ASSETS_DIR}/windows/misc/migration/"
+install(DIRECTORY "${AQUA_SOURCE_ASSETS_DIR}/windows/misc/migration/"
         DESTINATION "scripts"
         COMPONENT assets)
-install(DIRECTORY "${SUNSHINE_SOURCE_ASSETS_DIR}/windows/misc/path/"
+install(DIRECTORY "${AQUA_SOURCE_ASSETS_DIR}/windows/misc/path/"
         DESTINATION "scripts"
         COMPONENT assets)
 
 # Configurable options for the service
-install(DIRECTORY "${SUNSHINE_SOURCE_ASSETS_DIR}/windows/misc/autostart/"
+install(DIRECTORY "${AQUA_SOURCE_ASSETS_DIR}/windows/misc/autostart/"
         DESTINATION "scripts"
         COMPONENT autostart)
 
 # scripts
-install(DIRECTORY "${SUNSHINE_SOURCE_ASSETS_DIR}/windows/misc/firewall/"
+install(DIRECTORY "${AQUA_SOURCE_ASSETS_DIR}/windows/misc/firewall/"
         DESTINATION "scripts"
         COMPONENT firewall)
-install(DIRECTORY "${SUNSHINE_SOURCE_ASSETS_DIR}/windows/misc/gamepad/"
+install(DIRECTORY "${AQUA_SOURCE_ASSETS_DIR}/windows/misc/gamepad/"
         DESTINATION "scripts"
         COMPONENT gamepad)
 
 # Sunshine assets
-install(DIRECTORY "${SUNSHINE_SOURCE_ASSETS_DIR}/windows/assets/"
-        DESTINATION "${SUNSHINE_ASSETS_DIR}"
+install(DIRECTORY "${AQUA_SOURCE_ASSETS_DIR}/windows/assets/"
+        DESTINATION "${AQUA_ASSETS_DIR}"
         COMPONENT assets)
 
 # copy assets (excluding shaders) to build directory, for running without install
-file(COPY "${SUNSHINE_SOURCE_ASSETS_DIR}/windows/assets/"
+file(COPY "${AQUA_SOURCE_ASSETS_DIR}/windows/assets/"
         DESTINATION "${CMAKE_BINARY_DIR}/assets"
         PATTERN "shaders" EXCLUDE)
 # use junction for shaders directory
-cmake_path(CONVERT "${SUNSHINE_SOURCE_ASSETS_DIR}/windows/assets/shaders"
+cmake_path(CONVERT "${AQUA_SOURCE_ASSETS_DIR}/windows/assets/shaders"
         TO_NATIVE_PATH_LIST shaders_in_build_src_native)
 cmake_path(CONVERT "${CMAKE_BINARY_DIR}/assets/shaders" TO_NATIVE_PATH_LIST shaders_in_build_dest_native)
 execute_process(COMMAND cmd.exe /c mklink /J "${shaders_in_build_dest_native}" "${shaders_in_build_src_native}")

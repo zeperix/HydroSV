@@ -119,10 +119,10 @@ bash -lc @'
     cmake -B build -G Ninja -S . \
         -DBUILD_WERROR=ON \
         -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-        -DSUNSHINE_ASSETS_DIR=assets \
-        -DSUNSHINE_PUBLISHER_NAME="LocalBuild" \
-        -DSUNSHINE_PUBLISHER_WEBSITE="https://app.lizardbyte.dev" \
-        -DSUNSHINE_PUBLISHER_ISSUE_URL="https://app.lizardbyte.dev/support"
+        -DAQUA_ASSETS_DIR=assets \
+        -DAQUA_PUBLISHER_NAME="LocalBuild" \
+        -DAQUA_PUBLISHER_WEBSITE="https://app.lizardbyte.dev" \
+        -DAQUA_PUBLISHER_ISSUE_URL="https://app.lizardbyte.dev/support"
     
     ninja -C build
 '@

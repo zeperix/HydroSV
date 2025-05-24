@@ -16,7 +16,7 @@ import process from 'process'
 let assetsSrcPath = 'src_assets/common/assets/web';
 let assetsDstPath = 'build/assets/web';
 
-if (process.env.SUNSHINE_BUILD_HOMEBREW) {
+if (process.env.AQUA_BUILD_HOMEBREW) {
     console.log("Building for homebrew, using default paths")
 }
 else {
@@ -27,13 +27,13 @@ else {
     //     must be strings that are neither absolute nor relative paths.
     // To avoid this, we resolve the potential symlinks using `fs.realpathSync` before
     // doing anything else with the paths.
-    if (process.env.SUNSHINE_SOURCE_ASSETS_DIR) {
-        let path = resolve(fs.realpathSync(process.env.SUNSHINE_SOURCE_ASSETS_DIR), "common/assets/web");
+    if (process.env.AQUA_SOURCE_ASSETS_DIR) {
+        let path = resolve(fs.realpathSync(process.env.AQUA_SOURCE_ASSETS_DIR), "common/assets/web");
         console.log("Using srcdir from Cmake: " + path);
         assetsSrcPath = path;
     }
-    if (process.env.SUNSHINE_ASSETS_DIR) {
-        let path = resolve(fs.realpathSync(process.env.SUNSHINE_ASSETS_DIR), "assets/web");
+    if (process.env.AQUA_ASSETS_DIR) {
+        let path = resolve(fs.realpathSync(process.env.AQUA_ASSETS_DIR), "assets/web");
         console.log("Using destdir from Cmake: " + path);
         assetsDstPath = path;
     }

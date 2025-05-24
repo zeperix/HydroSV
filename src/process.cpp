@@ -43,7 +43,7 @@
   #include <share.h>
 #endif
 
-#define DEFAULT_APP_IMAGE_PATH SUNSHINE_ASSETS_DIR "/box.png"
+#define DEFAULT_APP_IMAGE_PATH AQUA_ASSETS_DIR "/box.png"
 #define REMOTE_INPUT_UUID "8CB5C136-DA67-4F99-B4A1-F9CD35005CF4"
 #define VIRTUAL_DISPLAY_UUID "8902CB19-674A-403D-A587-41B092E900BA"
 #define TERMINATE_APP_UUID "E16CBE1B-295D-4632-9A76-EC4180C857D3"
@@ -168,7 +168,7 @@ namespace proc {
     allow_client_commands = false;
     placebo = true;
 
-#if defined SUNSHINE_TRAY && SUNSHINE_TRAY >= 1
+#if defined AQUA_TRAY && AQUA_TRAY >= 1
     system_tray::update_tray_playing(_app_name);
 #endif
   }
@@ -326,33 +326,33 @@ namespace proc {
     }
 
     // Add Stream-specific environment variables
-    _env["SUNSHINE_APP_ID"] = _app.id;
-    _env["SUNSHINE_APP_NAME"] = _app.name;
-    _env["SUNSHINE_CLIENT_UID"] = launch_session->unique_id;
-    _env["SUNSHINE_CLIENT_NAME"] = launch_session->device_name;
-    _env["SUNSHINE_CLIENT_WIDTH"] = std::to_string(render_width);
-    _env["SUNSHINE_CLIENT_HEIGHT"] = std::to_string(render_height);
-    _env["SUNSHINE_CLIENT_RENDER_WIDTH"] = std::to_string(launch_session->width);
-    _env["SUNSHINE_CLIENT_RENDER_HEIGHT"] = std::to_string(launch_session->height);
-    _env["SUNSHINE_CLIENT_SCALE_FACTOR"] = std::to_string(scale_factor);
-    _env["SUNSHINE_CLIENT_FPS"] = std::to_string(launch_session->fps);
-    _env["SUNSHINE_CLIENT_HDR"] = launch_session->enable_hdr ? "true" : "false";
-    _env["SUNSHINE_CLIENT_GCMAP"] = std::to_string(launch_session->gcmap);
-    _env["SUNSHINE_CLIENT_HOST_AUDIO"] = launch_session->host_audio ? "true" : "false";
-    _env["SUNSHINE_CLIENT_ENABLE_SOPS"] = launch_session->enable_sops ? "true" : "false";
+    _env["AQUA_APP_ID"] = _app.id;
+    _env["AQUA_APP_NAME"] = _app.name;
+    _env["AQUA_CLIENT_UID"] = launch_session->unique_id;
+    _env["AQUA_CLIENT_NAME"] = launch_session->device_name;
+    _env["AQUA_CLIENT_WIDTH"] = std::to_string(render_width);
+    _env["AQUA_CLIENT_HEIGHT"] = std::to_string(render_height);
+    _env["AQUA_CLIENT_RENDER_WIDTH"] = std::to_string(launch_session->width);
+    _env["AQUA_CLIENT_RENDER_HEIGHT"] = std::to_string(launch_session->height);
+    _env["AQUA_CLIENT_SCALE_FACTOR"] = std::to_string(scale_factor);
+    _env["AQUA_CLIENT_FPS"] = std::to_string(launch_session->fps);
+    _env["AQUA_CLIENT_HDR"] = launch_session->enable_hdr ? "true" : "false";
+    _env["AQUA_CLIENT_GCMAP"] = std::to_string(launch_session->gcmap);
+    _env["AQUA_CLIENT_HOST_AUDIO"] = launch_session->host_audio ? "true" : "false";
+    _env["AQUA_CLIENT_ENABLE_SOPS"] = launch_session->enable_sops ? "true" : "false";
     int channelCount = launch_session->surround_info & (65535);
     switch (channelCount) {
       case 2:
-        _env["SUNSHINE_CLIENT_AUDIO_CONFIGURATION"] = "2.0";
+        _env["AQUA_CLIENT_AUDIO_CONFIGURATION"] = "2.0";
         break;
       case 6:
-        _env["SUNSHINE_CLIENT_AUDIO_CONFIGURATION"] = "5.1";
+        _env["AQUA_CLIENT_AUDIO_CONFIGURATION"] = "5.1";
         break;
       case 8:
-        _env["SUNSHINE_CLIENT_AUDIO_CONFIGURATION"] = "7.1";
+        _env["AQUA_CLIENT_AUDIO_CONFIGURATION"] = "7.1";
         break;
     }
-    _env["SUNSHINE_CLIENT_AUDIO_SURROUND_PARAMS"] = launch_session->surround_params;
+    _env["AQUA_CLIENT_AUDIO_SURROUND_PARAMS"] = launch_session->surround_params;
 
     if (!_app.output.empty() && _app.output != "null"sv) {
 #ifdef _WIN32
@@ -493,7 +493,7 @@ namespace proc {
 
     fg.disable();
 
-#if defined SUNSHINE_TRAY && SUNSHINE_TRAY >= 1
+#if defined AQUA_TRAY && AQUA_TRAY >= 1
     system_tray::update_tray_playing(_app.name);
 #endif
 
@@ -524,7 +524,7 @@ namespace proc {
       BOOST_LOG(info) << "Adjust this behavior in the Applications tab or apps.json if this is not what you want."sv;
       placebo = true;
 
-    #if defined SUNSHINE_TRAY && SUNSHINE_TRAY >= 1
+    #if defined AQUA_TRAY && AQUA_TRAY >= 1
       if (_process.native_exit_code() != 0) {
         system_tray::update_tray_launch_error(proc::proc.get_last_run_app_name(), _process.native_exit_code());
       }
@@ -614,7 +614,7 @@ namespace proc {
       display_device::revert_configuration();
 #endif
 
-#if defined SUNSHINE_TRAY && SUNSHINE_TRAY >= 1
+#if defined AQUA_TRAY && AQUA_TRAY >= 1
       system_tray::update_tray_stopped(proc::proc.get_last_run_app_name());
 #endif
     }
@@ -772,12 +772,12 @@ namespace proc {
     }
 
     // check if image is in assets directory
-    auto full_image_path = std::filesystem::path(SUNSHINE_ASSETS_DIR) / app_image_path;
+    auto full_image_path = std::filesystem::path(AQUA_ASSETS_DIR) / app_image_path;
     if (std::filesystem::exists(full_image_path)) {
       return full_image_path.string();
     } else if (app_image_path == "./assets/steam.png") {
       // handle old default steam image definition
-      return SUNSHINE_ASSETS_DIR "/steam.png";
+      return AQUA_ASSETS_DIR "/steam.png";
     }
 
     // check if specified image exists

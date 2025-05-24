@@ -25,44 +25,44 @@ if (WIN32)
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)  # cmake-lint: disable=C0103
 endif ()
 
-# modify SUNSHINE_DEFINITIONS
+# modify AQUA_DEFINITIONS
 if (WIN32)
     list(APPEND
-            SUNSHINE_DEFINITIONS SUNSHINE_SHADERS_DIR="${CMAKE_SOURCE_DIR}/src_assets/windows/assets/shaders/directx")
+            AQUA_DEFINITIONS AQUA_SHADERS_DIR="${CMAKE_SOURCE_DIR}/src_assets/windows/assets/shaders/directx")
 elseif (NOT APPLE)
-    list(APPEND SUNSHINE_DEFINITIONS SUNSHINE_SHADERS_DIR="${CMAKE_SOURCE_DIR}/src_assets/linux/assets/shaders/opengl")
+    list(APPEND AQUA_DEFINITIONS AQUA_SHADERS_DIR="${CMAKE_SOURCE_DIR}/src_assets/linux/assets/shaders/opengl")
 endif ()
 
 set(TEST_DEFINITIONS)  # list will be appended as needed
 
 # this indicates we're building tests in case sunshine needs to adjust some code or add private tests
-list(APPEND TEST_DEFINITIONS SUNSHINE_TESTS)
+list(APPEND TEST_DEFINITIONS AQUA_TESTS)
 
 file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS
         ${CMAKE_SOURCE_DIR}/tests/*.h
         ${CMAKE_SOURCE_DIR}/tests/*.cpp)
 
-set(SUNSHINE_SOURCES
-        ${SUNSHINE_TARGET_FILES})
+set(AQUA_SOURCES
+        ${AQUA_TARGET_FILES})
 
 # remove main.cpp from the list of sources
-list(REMOVE_ITEM SUNSHINE_SOURCES ${CMAKE_SOURCE_DIR}/src/main.cpp)
+list(REMOVE_ITEM AQUA_SOURCES ${CMAKE_SOURCE_DIR}/src/main.cpp)
 
 add_executable(${PROJECT_NAME}
         ${TEST_SOURCES}
-        ${SUNSHINE_SOURCES})
+        ${AQUA_SOURCES})
 
-foreach(dep ${SUNSHINE_TARGET_DEPENDENCIES})
+foreach(dep ${AQUA_TARGET_DEPENDENCIES})
     add_dependencies(${PROJECT_NAME} ${dep})  # compile these before sunshine
 endforeach()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 target_link_libraries(${PROJECT_NAME}
-        ${SUNSHINE_EXTERNAL_LIBRARIES}
+        ${AQUA_EXTERNAL_LIBRARIES}
         gtest
         ${PLATFORM_LIBRARIES})
-target_compile_definitions(${PROJECT_NAME} PUBLIC ${SUNSHINE_DEFINITIONS} ${TEST_DEFINITIONS})
-target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${SUNSHINE_COMPILE_OPTIONS}>;$<$<COMPILE_LANGUAGE:CUDA>:${SUNSHINE_COMPILE_OPTIONS_CUDA};-std=c++17>)  # cmake-lint: disable=C0301
+target_compile_definitions(${PROJECT_NAME} PUBLIC ${AQUA_DEFINITIONS} ${TEST_DEFINITIONS})
+target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${AQUA_COMPILE_OPTIONS}>;$<$<COMPILE_LANGUAGE:CUDA>:${AQUA_COMPILE_OPTIONS_CUDA};-std=c++17>)  # cmake-lint: disable=C0301
 target_link_options(${PROJECT_NAME} PRIVATE)
 
 if (WIN32)

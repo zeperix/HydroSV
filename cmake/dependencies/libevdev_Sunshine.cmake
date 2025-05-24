@@ -31,7 +31,7 @@ else()
     set(EVDEV_LIBRARY "${BINARY_DIR}/libevdev/.libs/libevdev.a")
 
     # compile libevdev before sunshine
-    set(SUNSHINE_TARGET_DEPENDENCIES ${SUNSHINE_TARGET_DEPENDENCIES} libevdev)
+    set(AQUA_TARGET_DEPENDENCIES ${AQUA_TARGET_DEPENDENCIES} libevdev)
 
     set(EXTERNAL_PROJECT_LIBEVDEV_USED TRUE)
 endif()

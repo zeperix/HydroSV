@@ -115,14 +115,14 @@ cmake_args=(
   "-DBUILD_WERROR=ON"
   "-DCMAKE_BUILD_TYPE=Release"
   "-DCMAKE_INSTALL_PREFIX=%{_prefix}"
-  "-DSUNSHINE_ASSETS_DIR=%{_datadir}/sunshine"
-  "-DSUNSHINE_EXECUTABLE_PATH=%{_bindir}/sunshine"
-  "-DSUNSHINE_ENABLE_WAYLAND=ON"
-  "-DSUNSHINE_ENABLE_X11=ON"
-  "-DSUNSHINE_ENABLE_DRM=ON"
-  "-DSUNSHINE_PUBLISHER_NAME=LizardByte"
-  "-DSUNSHINE_PUBLISHER_WEBSITE=https://app.lizardbyte.dev"
-  "-DSUNSHINE_PUBLISHER_ISSUE_URL=https://app.lizardbyte.dev/support"
+  "-DAQUA_ASSETS_DIR=%{_datadir}/sunshine"
+  "-DAQUA_EXECUTABLE_PATH=%{_bindir}/sunshine"
+  "-DAQUA_ENABLE_WAYLAND=ON"
+  "-DAQUA_ENABLE_X11=ON"
+  "-DAQUA_ENABLE_DRM=ON"
+  "-DAQUA_PUBLISHER_NAME=LizardByte"
+  "-DAQUA_PUBLISHER_WEBSITE=https://app.lizardbyte.dev"
+  "-DAQUA_PUBLISHER_ISSUE_URL=https://app.lizardbyte.dev/support"
 )
 
 export CC=gcc-%{gcc_version}
@@ -177,11 +177,11 @@ function install_cuda() {
 
 if [ -n "%{cuda_version}" ] && [[ " ${cuda_supported_architectures[@]} " =~ " ${architecture} " ]]; then
   install_cuda
-  cmake_args+=("-DSUNSHINE_ENABLE_CUDA=ON")
+  cmake_args+=("-DAQUA_ENABLE_CUDA=ON")
   cmake_args+=("-DCMAKE_CUDA_COMPILER:PATH=%{cuda_dir}/bin/nvcc")
   cmake_args+=("-DCMAKE_CUDA_HOST_COMPILER=gcc-%{gcc_version}")
 else
-  cmake_args+=("-DSUNSHINE_ENABLE_CUDA=OFF")
+  cmake_args+=("-DAQUA_ENABLE_CUDA=OFF")
 fi
 
 # setup the version

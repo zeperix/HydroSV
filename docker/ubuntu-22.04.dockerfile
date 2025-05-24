@@ -63,14 +63,14 @@ FROM sunshine-base AS sunshine
 COPY --link --from=artifacts /sunshine*.deb /sunshine.deb
 
 # install sunshine
-RUN <<_INSTALL_SUNSHINE
+RUN <<_INSTALL_AQUA
 #!/bin/bash
 set -e
 apt-get update -y
 apt-get install -y --no-install-recommends /sunshine.deb
 apt-get clean
 rm -rf /var/lib/apt/lists/*
-_INSTALL_SUNSHINE
+_INSTALL_AQUA
 
 # network setup
 EXPOSE 47984-47990/tcp

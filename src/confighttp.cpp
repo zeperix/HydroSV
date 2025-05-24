@@ -807,7 +807,7 @@ namespace confighttp {
 
     nlohmann::json output_tree;
     output_tree["status"] = true;
-    output_tree["platform"] = SUNSHINE_PLATFORM;
+    output_tree["platform"] = AQUA_PLATFORM;
     output_tree["version"] = PROJECT_VER;
 #ifdef _WIN32
     output_tree["vdisplayStatus"] = (int)proc::vDisplayDriverStatus;

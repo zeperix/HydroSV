@@ -278,28 +278,28 @@ function run_install() {
     "-DBUILD_WERROR=ON"
     "-DCMAKE_BUILD_TYPE=Release"
     "-DCMAKE_INSTALL_PREFIX=/usr"
-    "-DSUNSHINE_ASSETS_DIR=share/sunshine"
-    "-DSUNSHINE_EXECUTABLE_PATH=/usr/bin/sunshine"
-    "-DSUNSHINE_ENABLE_WAYLAND=ON"
-    "-DSUNSHINE_ENABLE_X11=ON"
-    "-DSUNSHINE_ENABLE_DRM=ON"
+    "-DAQUA_ASSETS_DIR=share/sunshine"
+    "-DAQUA_EXECUTABLE_PATH=/usr/bin/sunshine"
+    "-DAQUA_ENABLE_WAYLAND=ON"
+    "-DAQUA_ENABLE_X11=ON"
+    "-DAQUA_ENABLE_DRM=ON"
     "-DBUILD_TESTS=false"
     "-DBUILD_DOCS=false"
     )
 
   if [ "$appimage_build" == 1 ]; then
-    cmake_args+=("-DSUNSHINE_BUILD_APPIMAGE=ON")
+    cmake_args+=("-DAQUA_BUILD_APPIMAGE=ON")
   fi
 
   # Publisher metadata
   if [ -n "$publisher_name" ]; then
-    cmake_args+=("-DSUNSHINE_PUBLISHER_NAME='${publisher_name}'")
+    cmake_args+=("-DAQUA_PUBLISHER_NAME='${publisher_name}'")
   fi
   if [ -n "$publisher_website" ]; then
-    cmake_args+=("-DSUNSHINE_PUBLISHER_WEBSITE='${publisher_website}'")
+    cmake_args+=("-DAQUA_PUBLISHER_WEBSITE='${publisher_website}'")
   fi
   if [ -n "$publisher_issue_url" ]; then
-    cmake_args+=("-DSUNSHINE_PUBLISHER_ISSUE_URL='${publisher_issue_url}'")
+    cmake_args+=("-DAQUA_PUBLISHER_ISSUE_URL='${publisher_issue_url}'")
   fi
 
   # Update the package list
@@ -372,7 +372,7 @@ function run_install() {
   doxygen_min="1.10.0"
   _doxygen_min="1_10_0"
   if ! check_version "doxygen" "$doxygen_min"; then
-    if [ "${SUNSHINE_COMPILE_DOXYGEN}" == "true" ]; then
+    if [ "${AQUA_COMPILE_DOXYGEN}" == "true" ]; then
       echo "Compiling doxygen"
       doxygen_url="https://github.com/doxygen/doxygen/releases/download/Release_${_doxygen_min}/doxygen-${doxygen_min}.src.tar.gz"
       echo "doxygen url: ${doxygen_url}"
@@ -401,10 +401,10 @@ function run_install() {
   # run the cuda install
   if [ -n "$cuda_version" ] && [ "$skip_cuda" == 0 ]; then
     install_cuda
-    cmake_args+=("-DSUNSHINE_ENABLE_CUDA=ON")
+    cmake_args+=("-DAQUA_ENABLE_CUDA=ON")
     cmake_args+=("-DCMAKE_CUDA_COMPILER:PATH=${build_dir}/cuda/bin/nvcc")
   else 
-    cmake_args+=("-DSUNSHINE_ENABLE_CUDA=OFF")
+    cmake_args+=("-DAQUA_ENABLE_CUDA=OFF")
   fi
 
   # Cmake stuff here

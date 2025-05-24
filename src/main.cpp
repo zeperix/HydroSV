@@ -245,7 +245,7 @@ int main(int argc, char *argv[]) {
 
   task_pool.start(1);
 
-#if defined SUNSHINE_TRAY && SUNSHINE_TRAY >= 1
+#if defined AQUA_TRAY && AQUA_TRAY >= 1
   // create tray thread and detach it
   system_tray::run_tray();
 #endif
@@ -360,7 +360,7 @@ int main(int argc, char *argv[]) {
   task_pool.join();
 
   // stop system tray
-#if defined SUNSHINE_TRAY && SUNSHINE_TRAY >= 1
+#if defined AQUA_TRAY && AQUA_TRAY >= 1
   system_tray::end_tray();
 #endif
 

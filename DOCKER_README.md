@@ -8,20 +8,20 @@ This image provides a method for you to easily use the latest Sunshine release i
 intended to use as a standalone container at this point, and should be considered experimental.
 
 ```dockerfile
-ARG SUNSHINE_VERSION=latest
-ARG SUNSHINE_OS=ubuntu-22.04
-FROM lizardbyte/sunshine:${SUNSHINE_VERSION}-${SUNSHINE_OS}
+ARG AQUA_VERSION=latest
+ARG AQUA_OS=ubuntu-22.04
+FROM lizardbyte/sunshine:${AQUA_VERSION}-${AQUA_OS}
 
 # install Steam, Wayland, etc.
 
 ENTRYPOINT steam && sunshine
 ```
 
-### SUNSHINE_VERSION
+### AQUA_VERSION
 - `latest`, `master`, `vX.X.X`
 - commit hash
 
-### SUNSHINE_OS
+### AQUA_OS
 Sunshine images are available with the following tag suffixes, based on their respective base images.
 
 - `archlinux`
@@ -30,8 +30,8 @@ Sunshine images are available with the following tag suffixes, based on their re
 - `ubuntu-24.04`
 
 ### Tags
-You must combine the `SUNSHINE_VERSION` and `SUNSHINE_OS` to determine the tag to pull. The format should be
-`<SUNSHINE_VERSION>-<SUNSHINE_OS>`. For example, `latest-ubuntu-24.04`.
+You must combine the `AQUA_VERSION` and `AQUA_OS` to determine the tag to pull. The format should be
+`<AQUA_VERSION>-<AQUA_OS>`. For example, `latest-ubuntu-24.04`.
 
 See all our available tags on [docker hub](https://hub.docker.com/r/lizardbyte/sunshine/tags) or
 [ghcr](https://github.com/LizardByte/Sunshine/pkgs/container/sunshine/versions) for more info.
@@ -146,7 +146,7 @@ If you want to change the PUID or PGID after the image has been built, it will r
 
 ## Supported Architectures
 
-Specifying `lizardbyte/sunshine:latest-<SUNSHINE_OS>` or `ghcr.io/lizardbyte/sunshine:latest-<SUNSHINE_OS>` should
+Specifying `lizardbyte/sunshine:latest-<AQUA_OS>` or `ghcr.io/lizardbyte/sunshine:latest-<AQUA_OS>` should
 retrieve the correct image for your architecture.
 
 The architectures supported by these images are shown in the table below.

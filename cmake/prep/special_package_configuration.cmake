@@ -1,20 +1,20 @@
 if(UNIX)
-    if(${SUNSHINE_CONFIGURE_HOMEBREW})
+    if(${AQUA_CONFIGURE_HOMEBREW})
         configure_file(packaging/sunshine.rb sunshine.rb @ONLY)
     endif()
 endif()
 
 if(APPLE)
-    if(${SUNSHINE_CONFIGURE_PORTFILE})
+    if(${AQUA_CONFIGURE_PORTFILE})
         configure_file(packaging/macos/Portfile Portfile @ONLY)
     endif()
 elseif(UNIX)
     # configure the .desktop file
-    set(SUNSHINE_DESKTOP_ICON "apollo.svg")
-    if(${SUNSHINE_BUILD_APPIMAGE})
+    set(AQUA_DESKTOP_ICON "apollo.svg")
+    if(${AQUA_BUILD_APPIMAGE})
         configure_file(packaging/linux/AppImage/sunshine.desktop sunshine.desktop @ONLY)
-    elseif(${SUNSHINE_BUILD_FLATPAK})
-        set(SUNSHINE_DESKTOP_ICON "${PROJECT_FQDN}")
+    elseif(${AQUA_BUILD_FLATPAK})
+        set(AQUA_DESKTOP_ICON "${PROJECT_FQDN}")
         configure_file(packaging/linux/flatpak/sunshine.desktop sunshine.desktop @ONLY)
         configure_file(packaging/linux/flatpak/${PROJECT_FQDN}.metainfo.xml
                 ${PROJECT_FQDN}.metainfo.xml @ONLY)
@@ -30,13 +30,13 @@ elseif(UNIX)
     configure_file(packaging/linux/sunshine.service.in sunshine.service @ONLY)
 
     # configure the arch linux pkgbuild
-    if(${SUNSHINE_CONFIGURE_PKGBUILD})
+    if(${AQUA_CONFIGURE_PKGBUILD})
         configure_file(packaging/linux/Arch/PKGBUILD PKGBUILD @ONLY)
         configure_file(packaging/linux/Arch/sunshine.install sunshine.install @ONLY)
     endif()
 
     # configure the flatpak manifest
-    if(${SUNSHINE_CONFIGURE_FLATPAK_MAN})
+    if(${AQUA_CONFIGURE_FLATPAK_MAN})
         configure_file(packaging/linux/flatpak/${PROJECT_FQDN}.yml ${PROJECT_FQDN}.yml @ONLY)
         configure_file(packaging/linux/flatpak/${PROJECT_FQDN}.metainfo.xml
                 ${PROJECT_FQDN}.metainfo.xml @ONLY)
@@ -48,9 +48,9 @@ elseif(UNIX)
 endif()
 
 # return if configure only is set
-if(${SUNSHINE_CONFIGURE_ONLY})
+if(${AQUA_CONFIGURE_ONLY})
     # message
-    message(STATUS "SUNSHINE_CONFIGURE_ONLY: ON, exiting...")
+    message(STATUS "AQUA_CONFIGURE_ONLY: ON, exiting...")
     set(END_BUILD ON)
 else()
     set(END_BUILD OFF)

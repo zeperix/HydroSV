@@ -7,7 +7,7 @@
 // standard includes
 #include <bitset>
 
-#ifdef SUNSHINE_BUILD_WAYLAND
+#ifdef AQUA_BUILD_WAYLAND
   #include <linux-dmabuf-unstable-v1.h>
   #include <wlr-screencopy-unstable-v1.h>
   #include <xdg-output-unstable-v1.h>
@@ -18,9 +18,9 @@
 
 /**
  * The classes defined in this macro block should only be used by
- * cpp files whose compilation depends on SUNSHINE_BUILD_WAYLAND
+ * cpp files whose compilation depends on AQUA_BUILD_WAYLAND
  */
-#ifdef SUNSHINE_BUILD_WAYLAND
+#ifdef AQUA_BUILD_WAYLAND
 
 namespace wl {
   using display_internal_t = util::safe_ptr<wl_display, wl_display_disconnect>;

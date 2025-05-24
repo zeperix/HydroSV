@@ -68,12 +68,12 @@ class @PROJECT_NAME@ < Formula
       -DCMAKE_INSTALL_PREFIX=#{prefix}
       -DHOMEBREW_ALLOW_FETCHCONTENT=ON
       -DOPENSSL_ROOT_DIR=#{Formula["openssl"].opt_prefix}
-      -DSUNSHINE_ASSETS_DIR=sunshine/assets
-      -DSUNSHINE_BUILD_HOMEBREW=ON
-      -DSUNSHINE_ENABLE_TRAY=OFF
-      -DSUNSHINE_PUBLISHER_NAME='LizardByte'
-      -DSUNSHINE_PUBLISHER_WEBSITE='https://app.lizardbyte.dev'
-      -DSUNSHINE_PUBLISHER_ISSUE_URL='https://app.lizardbyte.dev/support'
+      -DAQUA_ASSETS_DIR=sunshine/assets
+      -DAQUA_BUILD_HOMEBREW=ON
+      -DAQUA_ENABLE_TRAY=OFF
+      -DAQUA_PUBLISHER_NAME='LizardByte'
+      -DAQUA_PUBLISHER_WEBSITE='https://app.lizardbyte.dev'
+      -DAQUA_PUBLISHER_ISSUE_URL='https://app.lizardbyte.dev/support'
     ]
 
     if build.with? "docs"

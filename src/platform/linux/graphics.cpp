@@ -23,8 +23,8 @@ extern "C" {
 #define fourcc_mod_code(vendor, val) ((((uint64_t) vendor) << 56) | ((val) & 0x00ffffffffffffffULL))
 #define DRM_FORMAT_MOD_INVALID fourcc_mod_code(0, ((1ULL << 56) - 1))
 
-#if !defined(SUNSHINE_SHADERS_DIR)  // for testing this needs to be defined in cmake as we don't do an install
-  #define SUNSHINE_SHADERS_DIR SUNSHINE_ASSETS_DIR "/shaders/opengl"
+#if !defined(AQUA_SHADERS_DIR)  // for testing this needs to be defined in cmake as we don't do an install
+  #define AQUA_SHADERS_DIR AQUA_ASSETS_DIR "/shaders/opengl"
 #endif
 
 using namespace std::literals;
@@ -741,11 +741,11 @@ namespace egl {
 
     {
       const char *sources[] {
-        SUNSHINE_SHADERS_DIR "/ConvertUV.frag",
-        SUNSHINE_SHADERS_DIR "/ConvertUV.vert",
-        SUNSHINE_SHADERS_DIR "/ConvertY.frag",
-        SUNSHINE_SHADERS_DIR "/Scene.vert",
-        SUNSHINE_SHADERS_DIR "/Scene.frag",
+        AQUA_SHADERS_DIR "/ConvertUV.frag",
+        AQUA_SHADERS_DIR "/ConvertUV.vert",
+        AQUA_SHADERS_DIR "/ConvertY.frag",
+        AQUA_SHADERS_DIR "/Scene.vert",
+        AQUA_SHADERS_DIR "/Scene.frag",
       };
 
       GLenum shader_type[2] {

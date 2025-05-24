@@ -17,27 +17,27 @@
 
 using namespace std::literals;
 
-#define SUNSHINE_STRINGVIEW_HELPER(x) x##sv
-#define SUNSHINE_STRINGVIEW(x) SUNSHINE_STRINGVIEW_HELPER(x)
+#define AQUA_STRINGVIEW_HELPER(x) x##sv
+#define AQUA_STRINGVIEW(x) AQUA_STRINGVIEW_HELPER(x)
 
 #define CU_CHECK(x, y) \
-  if (check((x), SUNSHINE_STRINGVIEW(y ": "))) \
+  if (check((x), AQUA_STRINGVIEW(y ": "))) \
   return -1
 
 #define CU_CHECK_VOID(x, y) \
-  if (check((x), SUNSHINE_STRINGVIEW(y ": "))) \
+  if (check((x), AQUA_STRINGVIEW(y ": "))) \
     return;
 
 #define CU_CHECK_PTR(x, y) \
-  if (check((x), SUNSHINE_STRINGVIEW(y ": "))) \
+  if (check((x), AQUA_STRINGVIEW(y ": "))) \
     return nullptr;
 
 #define CU_CHECK_OPT(x, y) \
-  if (check((x), SUNSHINE_STRINGVIEW(y ": "))) \
+  if (check((x), AQUA_STRINGVIEW(y ": "))) \
     return std::nullopt;
 
 #define CU_CHECK_IGNORE(x, y) \
-  check((x), SUNSHINE_STRINGVIEW(y ": "))
+  check((x), AQUA_STRINGVIEW(y ": "))
 
 using namespace std::literals;
 

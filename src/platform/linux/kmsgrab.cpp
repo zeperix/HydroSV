@@ -331,7 +331,7 @@ namespace platf {
 
         if (drmSetClientCap(fd.el, DRM_CLIENT_CAP_ATOMIC, 1)) {
           BOOST_LOG(warning) << "GPU driver doesn't support atomic mode-setting: "sv << path;
-#if defined(SUNSHINE_BUILD_X11)
+#if defined(AQUA_BUILD_X11)
           // We won't be able to capture the mouse cursor with KMS on non-atomic drivers,
           // so fall back to X11 if it's available and the user didn't explicitly force KMS.
           if (window_system == window_system_e::X11 && config::video.capture != "kms") {
@@ -1203,13 +1203,13 @@ namespace platf {
       }
 
       std::unique_ptr<avcodec_encode_device_t> make_avcodec_encode_device(pix_fmt_e pix_fmt) override {
-#ifdef SUNSHINE_BUILD_VAAPI
+#ifdef AQUA_BUILD_VAAPI
         if (mem_type == mem_type_e::vaapi) {
           return va::make_avcodec_encode_device(width, height, false);
         }
 #endif
 
-#ifdef SUNSHINE_BUILD_CUDA
+#ifdef AQUA_BUILD_CUDA
         if (mem_type == mem_type_e::cuda) {
           return cuda::make_avcodec_encode_device(width, height, false);
         }
@@ -1335,13 +1335,13 @@ namespace platf {
       }
 
       std::unique_ptr<avcodec_encode_device_t> make_avcodec_encode_device(pix_fmt_e pix_fmt) override {
-#ifdef SUNSHINE_BUILD_VAAPI
+#ifdef AQUA_BUILD_VAAPI
         if (mem_type == mem_type_e::vaapi) {
           return va::make_avcodec_encode_device(width, height, dup(card.render_fd.el), img_offset_x, img_offset_y, true);
         }
 #endif
 
-#ifdef SUNSHINE_BUILD_CUDA
+#ifdef AQUA_BUILD_CUDA
         if (mem_type == mem_type_e::cuda) {
           return cuda::make_avcodec_gl_encode_device(width, height, img_offset_x, img_offset_y);
         }
@@ -1463,14 +1463,14 @@ namespace platf {
           return -1;
         }
 
-#ifdef SUNSHINE_BUILD_VAAPI
+#ifdef AQUA_BUILD_VAAPI
         if (mem_type == mem_type_e::vaapi && !va::validate(card.render_fd.el)) {
           BOOST_LOG(warning) << "Monitor "sv << display_name << " doesn't support hardware encoding. Reverting back to GPU -> RAM -> GPU"sv;
           return -1;
         }
 #endif
 
-#ifndef SUNSHINE_BUILD_CUDA
+#ifndef AQUA_BUILD_CUDA
         if (mem_type == mem_type_e::cuda) {
           BOOST_LOG(warning) << "Attempting to use NVENC without CUDA support. Reverting back to GPU -> RAM -> GPU"sv;
           return -1;

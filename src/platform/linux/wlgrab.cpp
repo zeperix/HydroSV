@@ -222,13 +222,13 @@ namespace wl {
     }
 
     std::unique_ptr<platf::avcodec_encode_device_t> make_avcodec_encode_device(platf::pix_fmt_e pix_fmt) override {
-#ifdef SUNSHINE_BUILD_VAAPI
+#ifdef AQUA_BUILD_VAAPI
       if (mem_type == platf::mem_type_e::vaapi) {
         return va::make_avcodec_encode_device(width, height, false);
       }
 #endif
 
-#ifdef SUNSHINE_BUILD_CUDA
+#ifdef AQUA_BUILD_CUDA
       if (mem_type == platf::mem_type_e::cuda) {
         return cuda::make_avcodec_encode_device(width, height, false);
       }
@@ -340,13 +340,13 @@ namespace wl {
     }
 
     std::unique_ptr<platf::avcodec_encode_device_t> make_avcodec_encode_device(platf::pix_fmt_e pix_fmt) override {
-#ifdef SUNSHINE_BUILD_VAAPI
+#ifdef AQUA_BUILD_VAAPI
       if (mem_type == platf::mem_type_e::vaapi) {
         return va::make_avcodec_encode_device(width, height, 0, 0, true);
       }
 #endif
 
-#ifdef SUNSHINE_BUILD_CUDA
+#ifdef AQUA_BUILD_CUDA
       if (mem_type == platf::mem_type_e::cuda) {
         return cuda::make_avcodec_gl_encode_device(width, height, 0, 0);
       }

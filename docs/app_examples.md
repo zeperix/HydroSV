@@ -163,7 +163,7 @@ process is killed.}
 
 | Prep Step | Command                                                                                                                               |
 |-----------|---------------------------------------------------------------------------------------------------------------------------------------|
-| Do        | @code{}sh -c "xrandr --output HDMI-1 --mode ${SUNSHINE_CLIENT_WIDTH}x${SUNSHINE_CLIENT_HEIGHT} --rate ${SUNSHINE_CLIENT_FPS}"@endcode |
+| Do        | @code{}sh -c "xrandr --output HDMI-1 --mode ${AQUA_CLIENT_WIDTH}x${AQUA_CLIENT_HEIGHT} --rate ${AQUA_CLIENT_FPS}"@endcode |
 | Undo      | @code{}xrandr --output HDMI-1 --mode 3840x2160 --rate 120@endcode                                                                     |
 
 @hint{The above only works if the xrandr mode already exists. You will need to create new modes to stream to macOS
@@ -171,7 +171,7 @@ and iOS devices, since they use non-standard resolutions.
 
 You can update the ``Do`` command to this:
 ```bash
-bash -c "${HOME}/scripts/set-custom-res.sh \"${SUNSHINE_CLIENT_WIDTH}\" \"${SUNSHINE_CLIENT_HEIGHT}\" \"${SUNSHINE_CLIENT_FPS}\""
+bash -c "${HOME}/scripts/set-custom-res.sh \"${AQUA_CLIENT_WIDTH}\" \"${AQUA_CLIENT_HEIGHT}\" \"${AQUA_CLIENT_FPS}\""
 ```
 
 The `set-custom-res.sh` will have this content:
@@ -214,7 +214,7 @@ xrandr --output ${display_output} --primary --mode ${mode_alias} --pos 0x0 --rot
 
 | Prep Step | Command                                                                                                                                  |
 |-----------|------------------------------------------------------------------------------------------------------------------------------------------|
-| Do        | @code{}sh -c "wlr-xrandr --output HDMI-1 --mode \"${SUNSHINE_CLIENT_WIDTH}x${SUNSHINE_CLIENT_HEIGHT}@${SUNSHINE_CLIENT_FPS}Hz\""@endcode |
+| Do        | @code{}sh -c "wlr-xrandr --output HDMI-1 --mode \"${AQUA_CLIENT_WIDTH}x${AQUA_CLIENT_HEIGHT}@${AQUA_CLIENT_FPS}Hz\""@endcode |
 | Undo      | @code{}wlr-xrandr --output HDMI-1 --mode 3840x2160@120Hz@endcode                                                                         |
 
 @hint{`wlr-xrandr` only works with wlroots-based compositors.}
@@ -223,7 +223,7 @@ xrandr --output ${display_output} --primary --mode ${mode_alias} --pos 0x0 --rot
 
 | Prep Step | Command                                                                                                                               |
 |-----------|---------------------------------------------------------------------------------------------------------------------------------------|
-| Do        | @code{}sh -c "xrandr --output HDMI-1 --mode ${SUNSHINE_CLIENT_WIDTH}x${SUNSHINE_CLIENT_HEIGHT} --rate ${SUNSHINE_CLIENT_FPS}"@endcode |
+| Do        | @code{}sh -c "xrandr --output HDMI-1 --mode ${AQUA_CLIENT_WIDTH}x${AQUA_CLIENT_HEIGHT} --rate ${AQUA_CLIENT_FPS}"@endcode |
 | Undo      | @code{}xrandr --output HDMI-1 --mode 3840x2160 --rate 120@endcode                                                                     |
 
 The commands above are valid for an X11 session but won't work for
@@ -235,7 +235,7 @@ This script is intended as a drop-in replacement with the same syntax. (It can b
 
 | Prep Step | Command                                                                                                                              |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------|
-| Do        | @code{}sh -c "kscreen-doctor output.HDMI-A-1.mode.${SUNSHINE_CLIENT_WIDTH}x${SUNSHINE_CLIENT_HEIGHT}@${SUNSHINE_CLIENT_FPS}"@endcode |
+| Do        | @code{}sh -c "kscreen-doctor output.HDMI-A-1.mode.${AQUA_CLIENT_WIDTH}x${AQUA_CLIENT_HEIGHT}@${AQUA_CLIENT_FPS}"@endcode |
 | Undo      | @code{}kscreen-doctor output.HDMI-A-1.mode.3840x2160@120@endcode                                                                     |
 
 @attention{The names of your displays will differ between X11 and Wayland.
@@ -259,7 +259,7 @@ hard-coding their corresponding number (e.g. ``kscreen-doctor output.HDMI-A1.mod
 
 | Prep Step | Command                                                                                                                                                                                                                        |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Do        | @code{}sh -c "nvidia-settings -a CurrentMetaMode=\"HDMI-1: nvidia-auto-select { ViewPortIn=${SUNSHINE_CLIENT_WIDTH}x${SUNSHINE_CLIENT_HEIGHT}, ViewPortOut=${SUNSHINE_CLIENT_WIDTH}x${SUNSHINE_CLIENT_HEIGHT}+0+0 }\""@endcode |
+| Do        | @code{}sh -c "nvidia-settings -a CurrentMetaMode=\"HDMI-1: nvidia-auto-select { ViewPortIn=${AQUA_CLIENT_WIDTH}x${AQUA_CLIENT_HEIGHT}, ViewPortOut=${AQUA_CLIENT_WIDTH}x${AQUA_CLIENT_HEIGHT}+0+0 }\""@endcode |
 | Undo      | @code{}nvidia-settings -a CurrentMetaMode=\"HDMI-1: nvidia-auto-select { ViewPortIn=3840x2160, ViewPortOut=3840x2160+0+0 }"@endcode                                                                                            |
 
 ##### macOS
@@ -271,7 +271,7 @@ This tool can be installed following instructions in their
 
 | Prep Step | Command                                                                                                                                                                  |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Do        | @code{}sh -c "displayplacer \"id:<screenId> res:${SUNSHINE_CLIENT_WIDTH}x${SUNSHINE_CLIENT_HEIGHT} hz:${SUNSHINE_CLIENT_FPS} scaling:on origin:(0,0) degree:0\""@endcode |
+| Do        | @code{}sh -c "displayplacer \"id:<screenId> res:${AQUA_CLIENT_WIDTH}x${AQUA_CLIENT_HEIGHT} hz:${AQUA_CLIENT_FPS} scaling:on origin:(0,0) degree:0\""@endcode |
 | Undo      | @code{}displayplacer "id:<screenId> res:3840x2160 hz:120 scaling:on origin:(0,0) degree:0"@endcode                                                                       |
 
 ##### Windows
@@ -284,7 +284,7 @@ This tool can be downloaded from their [SourceForge repository](https://sourcefo
 
 | Prep Step | Command                                                                                                                   |
 |-----------|---------------------------------------------------------------------------------------------------------------------------|
-| Do        | @code{}cmd /C "FullPath\qres.exe /x:%SUNSHINE_CLIENT_WIDTH% /y:%SUNSHINE_CLIENT_HEIGHT% /r:%SUNSHINE_CLIENT_FPS%"@endcode |
+| Do        | @code{}cmd /C "FullPath\qres.exe /x:%AQUA_CLIENT_WIDTH% /y:%AQUA_CLIENT_HEIGHT% /r:%AQUA_CLIENT_FPS%"@endcode |
 | Undo      | @code{}FullPath\qres.exe /x:3840 /y:2160 /r:120@endcode                                                                   |
 
 ### Additional Considerations

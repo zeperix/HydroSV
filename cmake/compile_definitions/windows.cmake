@@ -1,13 +1,13 @@
 # windows specific compile definitions
 
-add_compile_definitions(SUNSHINE_PLATFORM="windows")
+add_compile_definitions(AQUA_PLATFORM="windows")
 
 enable_language(RC)
 set(CMAKE_RC_COMPILER windres)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
 
 # gcc complains about misleading indentation in some mingw includes
-list(APPEND SUNSHINE_COMPILE_OPTIONS -Wno-misleading-indentation)
+list(APPEND AQUA_COMPILE_OPTIONS -Wno-misleading-indentation)
 
 # see gcc bug 98723
 add_definitions(-DUSE_BOOST_REGEX)
@@ -34,8 +34,8 @@ file(GLOB NVPREFS_FILES CONFIGURE_DEPENDS
 include_directories(SYSTEM "${CMAKE_SOURCE_DIR}/third-party/ViGEmClient/include")
 
 # apollo icon
-if(NOT DEFINED SUNSHINE_ICON_PATH)
-    set(SUNSHINE_ICON_PATH "${CMAKE_SOURCE_DIR}/apollo.ico")
+if(NOT DEFINED AQUA_ICON_PATH)
+    set(AQUA_ICON_PATH "${CMAKE_SOURCE_DIR}/apollo.ico")
 endif()
 
 configure_file("${CMAKE_SOURCE_DIR}/src/platform/windows/windows.rc.in" windows.rc @ONLY)
@@ -91,7 +91,7 @@ list(PREPEND PLATFORM_LIBRARIES
         wsock32
 )
 
-if(SUNSHINE_ENABLE_TRAY)
+if(AQUA_ENABLE_TRAY)
     list(APPEND PLATFORM_TARGET_FILES
             "${CMAKE_SOURCE_DIR}/third-party/tray/src/tray_windows.c")
 endif()

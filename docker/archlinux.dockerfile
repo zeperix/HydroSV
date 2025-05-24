@@ -74,13 +74,13 @@ else
   sub_version=""
 fi
 cmake \
-  -DSUNSHINE_CONFIGURE_PKGBUILD=ON \
-  -DSUNSHINE_SUB_VERSION="${sub_version}" \
+  -DAQUA_CONFIGURE_PKGBUILD=ON \
+  -DAQUA_SUB_VERSION="${sub_version}" \
   -DGITHUB_CLONE_URL="${CLONE_URL}" \
   -DGITHUB_BRANCH=${BRANCH} \
   -DGITHUB_BUILD_VERSION=${BUILD_VERSION} \
   -DGITHUB_COMMIT="${COMMIT}" \
-  -DSUNSHINE_CONFIGURE_ONLY=ON \
+  -DAQUA_CONFIGURE_ONLY=ON \
   /build/sunshine
 _MAKE
 
@@ -124,13 +124,13 @@ FROM sunshine-base AS sunshine
 COPY --link --from=artifacts /sunshine.pkg.tar.zst /
 
 # install sunshine
-RUN <<_INSTALL_SUNSHINE
+RUN <<_INSTALL_AQUA
 #!/bin/bash
 set -e
 pacman -U --disable-download-timeout --needed --noconfirm \
   /sunshine.pkg.tar.zst
 pacman -Scc --noconfirm
-_INSTALL_SUNSHINE
+_INSTALL_AQUA
 
 # network setup
 EXPOSE 47984-47990/tcp

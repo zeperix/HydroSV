@@ -358,7 +358,7 @@ namespace nvhttp {
     client_t &client = client_root;
     client.named_devices.push_back(named_cert_p);
 
-#if defined SUNSHINE_TRAY && SUNSHINE_TRAY >= 1
+#if defined AQUA_TRAY && AQUA_TRAY >= 1
     system_tray::update_tray_paired(named_cert_p->name);
 #endif
 
@@ -779,7 +779,7 @@ namespace nvhttp {
 
           getservercert(ptr->second, tree, pin);
         } else {
-#if defined SUNSHINE_TRAY && SUNSHINE_TRAY >= 1
+#if defined AQUA_TRAY && AQUA_TRAY >= 1
           system_tray::update_tray_require_pin();
 #endif
           ptr->second.async_insert_pin.response = std::move(response);
@@ -986,10 +986,10 @@ namespace nvhttp {
         current_appid = 0;
       }
       tree.put("root.currentgame", current_appid);
-      tree.put("root.state", current_appid > 0 ? "SUNSHINE_SERVER_BUSY" : "SUNSHINE_SERVER_FREE");
+      tree.put("root.state", current_appid > 0 ? "AQUA_SERVER_BUSY" : "AQUA_SERVER_FREE");
     } else {
       tree.put("root.currentgame", 0);
-      tree.put("root.state", "SUNSHINE_SERVER_FREE");
+      tree.put("root.state", "AQUA_SERVER_FREE");
     }
 
     std::ostringstream data;
@@ -1378,7 +1378,7 @@ namespace nvhttp {
 
     rtsp_stream::launch_session_raise(launch_session);
 
-#if defined SUNSHINE_TRAY && SUNSHINE_TRAY >= 1
+#if defined AQUA_TRAY && AQUA_TRAY >= 1
     system_tray::update_tray_client_connected(named_cert_p->name);
 #endif
   }

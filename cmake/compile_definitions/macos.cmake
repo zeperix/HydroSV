@@ -1,6 +1,6 @@
 # macos specific compile definitions
 
-add_compile_definitions(SUNSHINE_PLATFORM="macos")
+add_compile_definitions(AQUA_PLATFORM="macos")
 
 set(MACOS_LINK_DIRECTORIES
         /opt/homebrew/lib
@@ -17,7 +17,7 @@ if(NOT BOOST_USE_STATIC AND NOT FETCH_CONTENT_BOOST_USED)
     ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
 endif()
 
-list(APPEND SUNSHINE_EXTERNAL_LIBRARIES
+list(APPEND AQUA_EXTERNAL_LIBRARIES
         ${APP_KIT_LIBRARY}
         ${APP_SERVICES_LIBRARY}
         ${AV_FOUNDATION_LIBRARY}
@@ -26,10 +26,10 @@ list(APPEND SUNSHINE_EXTERNAL_LIBRARIES
         ${FOUNDATION_LIBRARY}
         ${VIDEO_TOOLBOX_LIBRARY})
 
-set(APPLE_PLIST_FILE "${SUNSHINE_SOURCE_ASSETS_DIR}/macos/assets/Info.plist")
+set(APPLE_PLIST_FILE "${AQUA_SOURCE_ASSETS_DIR}/macos/assets/Info.plist")
 
 # todo - tray is not working on macos
-set(SUNSHINE_TRAY 0)
+set(AQUA_TRAY 0)
 
 set(PLATFORM_TARGET_FILES
         "${CMAKE_SOURCE_DIR}/src/platform/macos/av_audio.h"
@@ -49,8 +49,8 @@ set(PLATFORM_TARGET_FILES
         "${CMAKE_SOURCE_DIR}/third-party/TPCircularBuffer/TPCircularBuffer.h"
         ${APPLE_PLIST_FILE})
 
-if(SUNSHINE_ENABLE_TRAY)
-    list(APPEND SUNSHINE_EXTERNAL_LIBRARIES
+if(AQUA_ENABLE_TRAY)
+    list(APPEND AQUA_EXTERNAL_LIBRARIES
             ${COCOA})
     list(APPEND PLATFORM_TARGET_FILES
             "${CMAKE_SOURCE_DIR}/third-party/tray/src/tray_darwin.m")

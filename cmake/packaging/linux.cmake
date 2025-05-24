@@ -1,27 +1,27 @@
 # linux specific packaging
 
-install(DIRECTORY "${SUNSHINE_SOURCE_ASSETS_DIR}/linux/assets/"
-        DESTINATION "${SUNSHINE_ASSETS_DIR}")
+install(DIRECTORY "${AQUA_SOURCE_ASSETS_DIR}/linux/assets/"
+        DESTINATION "${AQUA_ASSETS_DIR}")
 
 # copy assets (excluding shaders) to build directory, for running without install
-file(COPY "${SUNSHINE_SOURCE_ASSETS_DIR}/linux/assets/"
+file(COPY "${AQUA_SOURCE_ASSETS_DIR}/linux/assets/"
         DESTINATION "${CMAKE_BINARY_DIR}/assets"
         PATTERN "shaders" EXCLUDE)
 # use symbolic link for shaders directory
-file(CREATE_LINK "${SUNSHINE_SOURCE_ASSETS_DIR}/linux/assets/shaders"
+file(CREATE_LINK "${AQUA_SOURCE_ASSETS_DIR}/linux/assets/shaders"
         "${CMAKE_BINARY_DIR}/assets/shaders" COPY_ON_ERROR SYMBOLIC)
 
-if(${SUNSHINE_BUILD_APPIMAGE} OR ${SUNSHINE_BUILD_FLATPAK})
-    install(FILES "${SUNSHINE_SOURCE_ASSETS_DIR}/linux/misc/60-sunshine.rules"
-            DESTINATION "${SUNSHINE_ASSETS_DIR}/udev/rules.d")
+if(${AQUA_BUILD_APPIMAGE} OR ${AQUA_BUILD_FLATPAK})
+    install(FILES "${AQUA_SOURCE_ASSETS_DIR}/linux/misc/60-sunshine.rules"
+            DESTINATION "${AQUA_ASSETS_DIR}/udev/rules.d")
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/sunshine.service"
-            DESTINATION "${SUNSHINE_ASSETS_DIR}/systemd/user")
+            DESTINATION "${AQUA_ASSETS_DIR}/systemd/user")
 else()
     find_package(Systemd)
     find_package(Udev)
 
     if(UDEV_FOUND)
-        install(FILES "${SUNSHINE_SOURCE_ASSETS_DIR}/linux/misc/60-sunshine.rules"
+        install(FILES "${AQUA_SOURCE_ASSETS_DIR}/linux/misc/60-sunshine.rules"
                 DESTINATION "${UDEV_RULES_INSTALL_DIR}")
     endif()
     if(SYSTEMD_FOUND)
@@ -31,12 +31,12 @@ else()
 endif()
 
 # Post install
-set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${SUNSHINE_SOURCE_ASSETS_DIR}/linux/misc/postinst")
-set(CPACK_RPM_POST_INSTALL_SCRIPT_FILE "${SUNSHINE_SOURCE_ASSETS_DIR}/linux/misc/postinst")
+set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${AQUA_SOURCE_ASSETS_DIR}/linux/misc/postinst")
+set(CPACK_RPM_POST_INSTALL_SCRIPT_FILE "${AQUA_SOURCE_ASSETS_DIR}/linux/misc/postinst")
 
 # Apply setcap for RPM
 # https://github.com/coreos/rpm-ostree/discussions/5036#discussioncomment-10291071
-set(CPACK_RPM_USER_FILELIST "%caps(cap_sys_admin+p) ${SUNSHINE_EXECUTABLE_PATH}")
+set(CPACK_RPM_USER_FILELIST "%caps(cap_sys_admin+p) ${AQUA_EXECUTABLE_PATH}")
 
 # Dependencies
 set(CPACK_DEB_COMPONENT_INSTALL ON)
@@ -89,7 +89,7 @@ endif()
 set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS OFF)
 
 # application icon
-if(NOT ${SUNSHINE_BUILD_FLATPAK})
+if(NOT ${AQUA_BUILD_FLATPAK})
     install(FILES "${CMAKE_SOURCE_DIR}/apollo.svg"
             DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps")
 else()
@@ -99,29 +99,29 @@ else()
 endif()
 
 # tray icon
-if(${SUNSHINE_TRAY} STREQUAL 1)
-    if(NOT ${SUNSHINE_BUILD_FLATPAK})
+if(${AQUA_TRAY} STREQUAL 1)
+    if(NOT ${AQUA_BUILD_FLATPAK})
         install(FILES "${CMAKE_SOURCE_DIR}/apollo.svg"
                 DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/status"
                 RENAME "apollo-tray.svg")
-        install(FILES "${SUNSHINE_SOURCE_ASSETS_DIR}/common/assets/web/public/images/apollo-playing.svg"
+        install(FILES "${AQUA_SOURCE_ASSETS_DIR}/common/assets/web/public/images/apollo-playing.svg"
                 DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/status")
-        install(FILES "${SUNSHINE_SOURCE_ASSETS_DIR}/common/assets/web/public/images/apollo-pausing.svg"
+        install(FILES "${AQUA_SOURCE_ASSETS_DIR}/common/assets/web/public/images/apollo-pausing.svg"
                 DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/status")
-        install(FILES "${SUNSHINE_SOURCE_ASSETS_DIR}/common/assets/web/public/images/apollo-locked.svg"
+        install(FILES "${AQUA_SOURCE_ASSETS_DIR}/common/assets/web/public/images/apollo-locked.svg"
                 DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/status")
     else()
         # flatpak icons must be prefixed with the app id or they will not be included in the flatpak
         install(FILES "${CMAKE_SOURCE_DIR}/apollo.svg"
                 DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/status"
                 RENAME "${PROJECT_FQDN}-tray.svg")
-        install(FILES "${SUNSHINE_SOURCE_ASSETS_DIR}/common/assets/web/public/images/apollo-playing.svg"
+        install(FILES "${AQUA_SOURCE_ASSETS_DIR}/common/assets/web/public/images/apollo-playing.svg"
                 DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/status"
                 RENAME "${PROJECT_FQDN}-playing.svg")
-        install(FILES "${SUNSHINE_SOURCE_ASSETS_DIR}/common/assets/web/public/images/apollo-pausing.svg"
+        install(FILES "${AQUA_SOURCE_ASSETS_DIR}/common/assets/web/public/images/apollo-pausing.svg"
                 DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/status"
                 RENAME "${PROJECT_FQDN}-pausing.svg")
-        install(FILES "${SUNSHINE_SOURCE_ASSETS_DIR}/common/assets/web/public/images/apollo-locked.svg"
+        install(FILES "${AQUA_SOURCE_ASSETS_DIR}/common/assets/web/public/images/apollo-locked.svg"
                 DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/status"
                 RENAME "${PROJECT_FQDN}-locked.svg")
     endif()
@@ -137,7 +137,7 @@ endif()
 
 # desktop file
 # todo - validate desktop files with `desktop-file-validate`
-if(NOT ${SUNSHINE_BUILD_FLATPAK})
+if(NOT ${AQUA_BUILD_FLATPAK})
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/sunshine.desktop"
             DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
 else()
@@ -145,14 +145,14 @@ else()
             DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications"
             RENAME "${PROJECT_FQDN}.desktop")
 endif()
-if(NOT ${SUNSHINE_BUILD_APPIMAGE} AND NOT ${SUNSHINE_BUILD_FLATPAK})
+if(NOT ${AQUA_BUILD_APPIMAGE} AND NOT ${AQUA_BUILD_FLATPAK})
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/sunshine_terminal.desktop"
             DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
 endif()
 
 # metadata file
 # todo - validate file with `appstream-util validate-relax`
-if(NOT ${SUNSHINE_BUILD_FLATPAK})
+if(NOT ${AQUA_BUILD_FLATPAK})
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/sunshine.appdata.xml"
             DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo")
 else()
